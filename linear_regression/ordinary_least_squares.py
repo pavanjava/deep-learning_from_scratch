@@ -2,7 +2,7 @@ from typing import List
 
 
 # Define the LinearRegression class with methods to fit and predict.
-class LinearRegression():
+class LinearRegression:
     def __init__(self, data_set: List):
         self.data = data_set
         self.alpha = 0
