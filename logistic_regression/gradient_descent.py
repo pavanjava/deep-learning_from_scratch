@@ -20,21 +20,13 @@ x, y = create_data()
 # plt.scatter(x[:,0], x[:,1], c=y, cmap="winter", s=100)
 # plt.show()
 
-# print(x)
-# print(y)
-
 # split data into train and test sets
 x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2, random_state=42, shuffle=True)
 
-epochs = 1000
-lr = 0.01
-w = np.zeros(x_train[0].shape)
-
-print(x_train.shape)
-print(y_train.shape)
-print(x_test.shape)
-print(y_test.shape)
-print(w.shape)
+epochs = 2000
+lr = 0.1
+x_train = np.insert(x_train, 0, 1, axis=1)
+w = np.zeros(x_train.shape[1])
 
 
 # define sigmoid function
@@ -42,13 +34,16 @@ def compute_sigmoid(val):
     return 1 / (1 + np.exp(-val))
 
 
-def gradient(weights=None):
+def gradient(weights):
     for _ in range(epochs):
-        predictions = compute_sigmoid(np.dot(weights, x_train.T))
+        predictions = compute_sigmoid(np.dot(x_train, weights))
         error = y_train - predictions
-        weights += lr * np.dot(error, x_train) / len(y_train)
-        # print(f"Epoch {_}, Loss: {np.mean(np.square(error))}")
+        weights += lr * np.dot(x_train.T, error) / len(y_train)
+        print(f"Epoch {_}, Loss: {np.mean(np.square(error))}")
     return weights[1:], weights[0]
 
 
-print(gradient(w))
+# Train the model
+_weights, bias = gradient(w)
+print("\nFinal weights:", _weights)
+print("Final bias:", bias)
