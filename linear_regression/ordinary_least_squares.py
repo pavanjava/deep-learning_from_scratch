@@ -15,17 +15,17 @@ class LinearRegression:
             x_sum += _tuple[0]
             y_sum += _tuple[1]
 
-        x_mean = x_sum / len(data_set) # calculate mean of x values
-        y_mean = y_sum / len(data_set) # calculate mean of y values
+        x_mean = x_sum / len(data_set)  # calculate mean of x values
+        y_mean = y_sum / len(data_set)  # calculate mean of y values
 
         covariance_xy = 0
         variance_x = 0
         for _tuple in data_set:
-            covariance_xy += ((_tuple[0] - x_mean) * (_tuple[1] - y_mean)) # calculate covariance of x and y
-            variance_x += (_tuple[0] - x_mean) ** 2 # calculate variance of x
+            covariance_xy += ((_tuple[0] - x_mean) * (_tuple[1] - y_mean))  # calculate covariance of x and y
+            variance_x += (_tuple[0] - x_mean) ** 2  # calculate variance of x
 
-        self.alpha = covariance_xy / variance_x # calculate slope (alpha)
-        self.beta = y_mean - self.alpha * x_mean # calculate intercept (beta)
+        self.alpha = covariance_xy / variance_x  # calculate slope (alpha)
+        self.beta = y_mean - self.alpha * x_mean  # calculate intercept (beta)
 
     # predict the value of y for a given x value using the linear regression model.
     def predict(self, data: int) -> float:
