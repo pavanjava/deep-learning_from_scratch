@@ -4,7 +4,8 @@ from typing import Any
 
 # Define a class for Linear Regression using Gradient Descent
 class LinearRegression:
-    def __init__(self, X: Any, y: Any, alpha: float = 0.0, beta: float = 0.0, epochs: int = 1000, lr: float = 0.01, is_print: bool = False):
+    def __init__(self, X: Any, y: Any, alpha: float = 0.0, beta: float = 0.0, epochs: int = 1000, lr: float = 0.01,
+                 is_print: bool = False):
         self.alpha = alpha
         self.beta = beta
         self.epochs = epochs
@@ -17,8 +18,8 @@ class LinearRegression:
         for _ in range(self.epochs):
             y_pred = self.alpha * self.X + self.beta
             mse = np.sum((self.y - y_pred) ** 2).mean()
-            alpha_d = -(2/len(self.X)) * np.sum(self.X * (self.y - y_pred))
-            beta_d = -(2/len(self.X)) * np.sum(self.y - y_pred)
+            alpha_d = -(2 / len(self.X)) * np.sum(self.X * (self.y - y_pred))
+            beta_d = -(2 / len(self.X)) * np.sum(self.y - y_pred)
             self.alpha -= self.learning_rate * alpha_d
             self.beta -= self.learning_rate * beta_d
             if self.is_print:
